@@ -25,11 +25,10 @@ class ArticleViewModel(
     private val _uiState = MutableStateFlow(ArticleUiState())
     val uiState: StateFlow<ArticleUiState> = _uiState.asStateFlow()
 
-    // Navigationから渡される記事のURLを想定 (キーは "articleUrl")
+    // Navigationから渡される記事のURL
     private val articleUrl: String = checkNotNull(savedStateHandle["articleUrl"])
 
     init {
-        // ViewModelが作成されたら、指定されたURLの記事の監視を開始
         _uiState.update { it.copy(isLoading = true) }
 
         newsApiRepository.getArticleStream(articleUrl).onEach { article ->
