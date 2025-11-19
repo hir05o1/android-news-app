@@ -1,6 +1,9 @@
 # ニュースアプリ
 
-※このREADMEはAI生成によるものです。  
+> [!IMPORTANT]
+> このREADMEはAI生成によるものです。  
+> このアプリは WorkManager を利用してみたくて作成したサンプルです。そのため、ニュースアプリとしての機能は必要最小限の実装に留めています。 
+
 KotlinとモダンなAndroid開発技術で構築された、シンプルなニュース閲覧アプリケーションです。  
 
 ## ✨ 主な機能
@@ -34,7 +37,7 @@ KotlinとモダンなAndroid開発技術で構築された、シンプルなニ�
 
 1. リポジトリをクローンします:
    ```bash
-   git clone https://github.com/your-username/android-news-app.git
+   git clone https://github.com/hir05o1/android-news-app.git
    ```
 
 2. プロジェクトのルートディレクトリに `local.properties` ファイルを作成します。
