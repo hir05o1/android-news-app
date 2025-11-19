@@ -25,6 +25,7 @@ import androidx.compose.runtime.getValue
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.layout.ContentScale
+import androidx.compose.ui.platform.LocalContext
 import androidx.compose.ui.res.painterResource
 import androidx.compose.ui.text.style.TextOverflow.Companion.Ellipsis
 import androidx.compose.ui.tooling.preview.Preview
@@ -35,6 +36,7 @@ import dev.hir05o1.news_app.data.news_api.Article
 import dev.hir05o1.news_app.data.news_api.Source
 import dev.hir05o1.news_app.ui.theme.News_appTheme
 import dev.hir05o1.news_app.utils.formatPublishedAt
+import dev.hir05o1.news_app.utils.shareUrl
 import org.koin.androidx.compose.koinViewModel
 
 @OptIn(ExperimentalMaterial3Api::class)
@@ -57,6 +59,7 @@ private fun ArticleViewContent(
     modifier: Modifier = Modifier,
     onNavigateBack: () -> Unit,
 ) {
+    val context = LocalContext.current
     Scaffold(
         modifier = modifier, topBar = {
             TopAppBar(title = {
@@ -68,6 +71,17 @@ private fun ArticleViewContent(
                         painter = painterResource(id = R.drawable.ic_arrow_back),
                         contentDescription = "Back",
                     )
+                }
+            }, actions = {
+                if (uiState.article != null) {
+                    IconButton(onClick = {
+                        shareUrl(context, uiState.article.url)
+                    }) {
+                        Icon(
+                            painter = painterResource(R.drawable.ic_share),
+                            contentDescription = "Share"
+                        )
+                    }
                 }
             })
         }) { innerPadding ->
