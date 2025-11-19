@@ -1,4 +1,4 @@
-package dev.hir05o1.news_app.ui.news_list
+package dev.hir05o1.news_app.ui.article_list
 
 import androidx.compose.foundation.clickable
 import androidx.compose.foundation.layout.Arrangement
@@ -42,14 +42,14 @@ import org.koin.androidx.compose.koinViewModel
 
 @OptIn(ExperimentalMaterial3Api::class)
 @Composable
-fun NewsListView(
+fun ArticleListView(
     modifier: Modifier = Modifier,
-    viewModel: NewsListViewModel = koinViewModel(),
+    viewModel: ArticleListViewModel = koinViewModel(),
     onArticleClick: (String) -> Unit
 ) {
     val uiState by viewModel.uiState.collectAsState()
 
-    NewsListContent(
+    ArticleListContent(
         uiState = uiState,
         onRefresh = viewModel::refresh,
         modifier = modifier,
@@ -59,8 +59,8 @@ fun NewsListView(
 
 @OptIn(ExperimentalMaterial3Api::class)
 @Composable
-private fun NewsListContent(
-    uiState: NewsListUiState,
+private fun ArticleListContent(
+    uiState: ArticleListUiState,
     onRefresh: () -> Unit,
     modifier: Modifier = Modifier,
     onArticleClick: (String) -> Unit
@@ -162,8 +162,8 @@ private fun ArticleItem(article: Article, onArticleClick: (String) -> Unit) {
 @OptIn(ExperimentalMaterial3Api::class)
 @Preview(showBackground = true, showSystemUi = true)
 @Composable
-fun NewsListContentPreview() {
-    val sampleUiState = NewsListUiState(
+private fun ArticleListPreview() {
+    val sampleUiState = ArticleListUiState(
         articles = listOf(
             Article(
                 source = Source(id = "bbc-news", name = "BBC News"),
@@ -187,6 +187,6 @@ fun NewsListContentPreview() {
         ), isLoading = false, error = null
     )
     News_appTheme {
-        NewsListContent(uiState = sampleUiState, onRefresh = {}, onArticleClick = {})
+        ArticleListContent(uiState = sampleUiState, onRefresh = {}, onArticleClick = {})
     }
 }

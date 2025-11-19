@@ -8,7 +8,7 @@ import androidx.navigation.compose.NavHost
 import androidx.navigation.compose.composable
 import androidx.navigation.compose.rememberNavController
 import dev.hir05o1.news_app.ui.article.ArticleView
-import dev.hir05o1.news_app.ui.news_list.NewsListView
+import dev.hir05o1.news_app.ui.article_list.ArticleListView
 
 @Composable
 fun NavGraph(
@@ -26,7 +26,7 @@ fun NavGraph(
         composable(
             Destinations.ARTICLE_LIST_ROUTE
         ) {
-            NewsListView(
+            ArticleListView(
                 onArticleClick = navActions::navigateToArticle
             )
         }
