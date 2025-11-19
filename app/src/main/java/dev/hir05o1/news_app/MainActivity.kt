@@ -4,7 +4,6 @@ import android.os.Bundle
 import androidx.activity.ComponentActivity
 import androidx.activity.compose.setContent
 import androidx.activity.enableEdgeToEdge
-import dev.hir05o1.news_app.ui.news_list.NewsListView
 import dev.hir05o1.news_app.ui.theme.News_appTheme
 
 class MainActivity : ComponentActivity() {
@@ -13,7 +12,7 @@ class MainActivity : ComponentActivity() {
         enableEdgeToEdge()
         setContent {
             News_appTheme {
-                NewsListView()
+                NavGraph()
             }
         }
     }

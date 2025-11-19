@@ -43,19 +43,27 @@ import org.koin.androidx.compose.koinViewModel
 @OptIn(ExperimentalMaterial3Api::class)
 @Composable
 fun NewsListView(
-    modifier: Modifier = Modifier, viewModel: NewsListViewModel = koinViewModel()
+    modifier: Modifier = Modifier,
+    viewModel: NewsListViewModel = koinViewModel(),
+    onArticleClick: (String) -> Unit
 ) {
     val uiState by viewModel.uiState.collectAsState()
 
     NewsListContent(
-        uiState = uiState, onRefresh = viewModel::refresh, modifier = modifier
+        uiState = uiState,
+        onRefresh = viewModel::refresh,
+        modifier = modifier,
+        onArticleClick = onArticleClick
     )
 }
 
 @OptIn(ExperimentalMaterial3Api::class)
 @Composable
 private fun NewsListContent(
-    uiState: NewsListUiState, onRefresh: () -> Unit, modifier: Modifier = Modifier
+    uiState: NewsListUiState,
+    onRefresh: () -> Unit,
+    modifier: Modifier = Modifier,
+    onArticleClick: (String) -> Unit
 ) {
     Scaffold(
         topBar = {
@@ -88,7 +96,7 @@ private fun NewsListContent(
                     verticalArrangement = Arrangement.spacedBy(16.dp)
                 ) {
                     items(items = uiState.articles, key = { it.url }) { article ->
-                        ArticleItem(article = article)
+                        ArticleItem(article = article, onArticleClick = onArticleClick)
                     }
                 }
             }
@@ -97,12 +105,12 @@ private fun NewsListContent(
 }
 
 @Composable
-private fun ArticleItem(article: Article) {
+private fun ArticleItem(article: Article, onArticleClick: (String) -> Unit) {
     ElevatedCard(
         modifier = Modifier
             .clip(shape = CardDefaults.elevatedShape)
             .clickable(
-                onClick = {})
+                onClick = { onArticleClick(article.url) })
             .fillMaxWidth(),
     ) {
         Row(
@@ -179,6 +187,6 @@ fun NewsListContentPreview() {
         ), isLoading = false, error = null
     )
     News_appTheme {
-        NewsListContent(uiState = sampleUiState, onRefresh = {})
+        NewsListContent(uiState = sampleUiState, onRefresh = {}, onArticleClick = {})
     }
 }
