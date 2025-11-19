@@ -35,12 +35,12 @@ import dev.hir05o1.news_app.data.news_api.Article
 import dev.hir05o1.news_app.data.news_api.Source
 import dev.hir05o1.news_app.ui.theme.News_appTheme
 import dev.hir05o1.news_app.utils.formatPublishedAt
-
+import org.koin.androidx.compose.koinViewModel
 
 @OptIn(ExperimentalMaterial3Api::class)
 @Composable
 fun ArticleView(
-    onNavigateBack: () -> Unit, viewModel: ArticleViewModel
+    onNavigateBack: () -> Unit, viewModel: ArticleViewModel = koinViewModel()
 ) {
     val uiState by viewModel.uiState.collectAsState()
     ArticleViewContent(

@@ -4,6 +4,7 @@ package dev.hir05o1.news_app.ui.article
 import androidx.lifecycle.SavedStateHandle
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
+import dev.hir05o1.news_app.DestinationArgs
 import dev.hir05o1.news_app.data.news_api.Article
 import dev.hir05o1.news_app.data.news_api.NewsApiRepository
 import kotlinx.coroutines.flow.MutableStateFlow
@@ -26,7 +27,7 @@ class ArticleViewModel(
     val uiState: StateFlow<ArticleUiState> = _uiState.asStateFlow()
 
     // Navigationから渡される記事のURL
-    private val articleUrl: String = checkNotNull(savedStateHandle["articleUrl"])
+    private val articleUrl: String = checkNotNull(savedStateHandle[DestinationArgs.ARTICLE_URL_ARG])
 
     init {
         _uiState.update { it.copy(isLoading = true) }
