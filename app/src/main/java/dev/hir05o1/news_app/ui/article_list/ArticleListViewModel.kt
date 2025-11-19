@@ -1,4 +1,4 @@
-package dev.hir05o1.news_app.ui.news_list
+package dev.hir05o1.news_app.ui.article_list
 
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
@@ -13,18 +13,18 @@ import kotlinx.coroutines.flow.onEach
 import kotlinx.coroutines.flow.update
 import kotlinx.coroutines.launch
 
-data class NewsListUiState(
+data class ArticleListUiState(
     val articles: List<Article> = emptyList(),
     val isLoading: Boolean = false,
     val error: String? = null
 )
 
-class NewsListViewModel(
+class ArticleListViewModel(
     private val repository: NewsApiRepository
 ) : ViewModel() {
 
-    private val _uiState = MutableStateFlow(NewsListUiState())
-    val uiState: StateFlow<NewsListUiState> = _uiState.asStateFlow()
+    private val _uiState = MutableStateFlow(ArticleListUiState())
+    val uiState: StateFlow<ArticleListUiState> = _uiState.asStateFlow()
 
     init {
         repository.getArticlesStream().onEach { articles ->
