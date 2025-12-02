@@ -30,6 +30,7 @@ import androidx.compose.ui.res.painterResource
 import androidx.compose.ui.text.style.TextOverflow.Companion.Ellipsis
 import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.dp
+import androidx.hilt.lifecycle.viewmodel.compose.hiltViewModel
 import coil.compose.AsyncImage
 import dev.hir05o1.news_app.R
 import dev.hir05o1.news_app.data.news_api.Article
@@ -37,12 +38,11 @@ import dev.hir05o1.news_app.data.news_api.Source
 import dev.hir05o1.news_app.ui.theme.News_appTheme
 import dev.hir05o1.news_app.utils.formatPublishedAt
 import dev.hir05o1.news_app.utils.shareUrl
-import org.koin.androidx.compose.koinViewModel
 
 @OptIn(ExperimentalMaterial3Api::class)
 @Composable
 fun ArticleView(
-    onNavigateBack: () -> Unit, viewModel: ArticleViewModel = koinViewModel()
+    onNavigateBack: () -> Unit, viewModel: ArticleViewModel = hiltViewModel()
 ) {
     val uiState by viewModel.uiState.collectAsState()
     ArticleViewContent(

@@ -2,13 +2,19 @@ package dev.hir05o1.news_app.data.worker
 
 import android.content.Context
 import android.util.Log
+import androidx.hilt.work.HiltWorker
 import androidx.work.CoroutineWorker
 import androidx.work.WorkerParameters
+import dagger.assisted.Assisted
+import dagger.assisted.AssistedInject
 import dev.hir05o1.news_app.data.news_api.EverythingParams
 import dev.hir05o1.news_app.data.news_api.NewsApiRepository
 
-class RefreshArticlesWorker(
-    appContext: Context, params: WorkerParameters, private val newsApiRepository: NewsApiRepository
+@HiltWorker
+class RefreshArticlesWorker @AssistedInject constructor(
+    @Assisted appContext: Context,
+    @Assisted params: WorkerParameters,
+    private val newsApiRepository: NewsApiRepository
 ) : CoroutineWorker(appContext, params) {
     private val tag = "RefreshArticlesWorker"
 

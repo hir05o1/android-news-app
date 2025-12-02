@@ -33,18 +33,18 @@ import androidx.compose.ui.layout.ContentScale
 import androidx.compose.ui.text.style.TextOverflow
 import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.dp
+import androidx.hilt.lifecycle.viewmodel.compose.hiltViewModel
 import coil.compose.AsyncImage
 import dev.hir05o1.news_app.data.news_api.Article
 import dev.hir05o1.news_app.data.news_api.Source
 import dev.hir05o1.news_app.ui.theme.News_appTheme
 import dev.hir05o1.news_app.utils.formatPublishedAt
-import org.koin.androidx.compose.koinViewModel
 
 @OptIn(ExperimentalMaterial3Api::class)
 @Composable
 fun ArticleListView(
     modifier: Modifier = Modifier,
-    viewModel: ArticleListViewModel = koinViewModel(),
+    viewModel: ArticleListViewModel = hiltViewModel(),
     onArticleClick: (String) -> Unit
 ) {
     val uiState by viewModel.uiState.collectAsState()

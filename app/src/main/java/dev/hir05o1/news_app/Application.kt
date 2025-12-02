@@ -1,32 +1,25 @@
 package dev.hir05o1.news_app
 
 import android.app.Application
+import androidx.hilt.work.HiltWorkerFactory
+import androidx.work.Configuration
 import androidx.work.Constraints
 import androidx.work.ExistingPeriodicWorkPolicy
 import androidx.work.NetworkType
 import androidx.work.PeriodicWorkRequestBuilder
 import androidx.work.WorkManager
+import dagger.hilt.android.HiltAndroidApp
 import dev.hir05o1.news_app.data.worker.RefreshArticlesWorker
-import dev.hir05o1.news_app.di.databaseModule
-import dev.hir05o1.news_app.di.networkModule
-import dev.hir05o1.news_app.di.repositoryModule
-import dev.hir05o1.news_app.di.viewModelModule
-import dev.hir05o1.news_app.di.workerModule
-import org.koin.android.ext.koin.androidContext
-import org.koin.androidx.workmanager.koin.workManagerFactory
-import org.koin.core.context.startKoin
 import java.util.concurrent.TimeUnit
+import javax.inject.Inject
 
-class Application : Application() {
-    override fun onCreate() {
-        super.onCreate()
-        startKoin {
-            androidContext(this@Application)
-            workManagerFactory()
-            modules(networkModule, repositoryModule, viewModelModule, databaseModule, workerModule)
-        }
-        setupRecurringWork()
-    }
+@HiltAndroidApp
+class Application : Application(), Configuration.Provider {
+    @Inject
+    lateinit var workerFactory: HiltWorkerFactory
+
+    override val workManagerConfiguration: Configuration
+        get() = Configuration.Builder().setWorkerFactory(workerFactory).build()
 
     private fun setupRecurringWork() {
         val constraints =
@@ -37,6 +30,10 @@ class Application : Application() {
         WorkManager.getInstance(applicationContext).enqueueUniquePeriodicWork(
             "refresh-articles-work", ExistingPeriodicWorkPolicy.KEEP, repeatingRequest
         )
+    }
+    override fun onCreate() {
+        super.onCreate()
+        setupRecurringWork()
     }
 }
 
