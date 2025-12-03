@@ -111,6 +111,7 @@ dependencies {
     implementation(libs.androidx.hilt.navigation.compose)
     implementation(libs.androidx.hilt.work)
     testImplementation(libs.hilt.android.testing)
+    kspTest(libs.hilt.android.compiler)
 
     // Robolectric
     testImplementation("org.robolectric:robolectric:4.13")

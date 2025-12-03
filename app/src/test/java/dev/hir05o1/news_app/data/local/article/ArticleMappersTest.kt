@@ -94,6 +94,7 @@ class ArticleMappersTest {
         assertEquals(localArticle.urlToImage, article.urlToImage)
         assertEquals(localArticle.publishedAt, article.publishedAt)
         assertEquals(localArticle.content, article.content)
+
     }
 
     @Test
