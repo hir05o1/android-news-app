@@ -1,15 +1,29 @@
 package dev.hir05o1.news_app.di
 
+import android.content.Context
 import androidx.room.Room
+import dagger.Module
+import dagger.Provides
+import dagger.hilt.InstallIn
+import dagger.hilt.android.qualifiers.ApplicationContext
+import dagger.hilt.components.SingletonComponent
 import dev.hir05o1.news_app.data.local.article.ArticleDatabase
-import org.koin.android.ext.koin.androidContext
-import org.koin.dsl.module
+import javax.inject.Singleton
 
-val databaseModule = module {
-    single {
-        Room.databaseBuilder(
-            androidContext(), ArticleDatabase::class.java, "article.db"
+@Module
+@InstallIn(SingletonComponent::class)
+object DatabaseModule {
+    @Provides
+    @Singleton
+    fun provideArticleDatabase(
+        @ApplicationContext context: Context
+    ): ArticleDatabase {
+        return Room.databaseBuilder(
+            context, ArticleDatabase::class.java, "article.db"
         ).build()
     }
-    single { get<ArticleDatabase>().articleDao() }
+
+    @Singleton
+    @Provides
+    fun provideArticleDao(db: ArticleDatabase) = db.articleDao()
 }

@@ -6,8 +6,9 @@ import dev.hir05o1.news_app.data.local.article.toApiArticle
 import dev.hir05o1.news_app.data.local.article.toLocalArticle
 import kotlinx.coroutines.flow.Flow
 import kotlinx.coroutines.flow.map
+import javax.inject.Inject
 
-class NewsApiRepository(
+class NewsApiRepository @Inject constructor(
     private val newsApiClient: NewsApiClient, private val articleDao: ArticleDao
 ) {
     private val tag = "NewsApiRepository"

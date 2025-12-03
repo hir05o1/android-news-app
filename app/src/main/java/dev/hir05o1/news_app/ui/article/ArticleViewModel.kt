@@ -4,9 +4,11 @@ package dev.hir05o1.news_app.ui.article
 import androidx.lifecycle.SavedStateHandle
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
+import dagger.hilt.android.lifecycle.HiltViewModel
 import dev.hir05o1.news_app.DestinationArgs
 import dev.hir05o1.news_app.data.news_api.Article
 import dev.hir05o1.news_app.data.news_api.NewsApiRepository
+import javax.inject.Inject
 import kotlinx.coroutines.flow.MutableStateFlow
 import kotlinx.coroutines.flow.StateFlow
 import kotlinx.coroutines.flow.asStateFlow
@@ -19,7 +21,8 @@ data class ArticleUiState(
     val article: Article? = null, val isLoading: Boolean = false, val error: String? = null
 )
 
-class ArticleViewModel(
+@HiltViewModel
+class ArticleViewModel @Inject constructor(
     newsApiRepository: NewsApiRepository, savedStateHandle: SavedStateHandle
 ) : ViewModel() {
 
