@@ -92,7 +92,6 @@ dependencies {
     implementation(libs.androidx.lifecycle.runtime.ktx)
     implementation(libs.androidx.lifecycle.viewmodel.compose)
 
-
     // Coil
     implementation(libs.coil.compose)
 
@@ -110,4 +109,10 @@ dependencies {
     implementation(libs.androidx.hilt.navigation.compose)
     implementation(libs.androidx.hilt.work)
     testImplementation(libs.hilt.android.testing)
+
+    // Robolectric
+    testImplementation("org.robolectric:robolectric:4.13")
+
+    // MockK
+    testImplementation("io.mockk:mockk:1.13.13")
 }
